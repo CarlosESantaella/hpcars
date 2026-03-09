@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__laravel-boost__application-info",
+      "mcp__filesystem__directory_tree",
+      "mcp__filesystem__list_directory",
+      "mcp__laravel-boost__list-routes",
+      "mcp__laravel-boost__database-schema",
+      "mcp__filesystem__read_multiple_files",
+      "mcp__claude_ai_Mermaid_Chart__validate_and_render_mermaid_diagram",
+      "Bash(php artisan:*)",
+      "Bash(vendor/bin/pint:*)",
+      "Bash(if exist \"storage\\\\framework\\\\views\\\\livewire\" rmdir /s /q \"storage\\\\framework\\\\views\\\\livewire\")",
+      "mcp__laravel-boost__search-docs",
+      "mcp__filesystem__read_text_file",
+      "mcp__laravel-boost__tinker",
+      "mcp__laravel-boost__database-query",
+      "Bash(pdftotext:*)",
+      "mcp__laravel-boost__get-absolute-url",
+      "Bash(findstr:*)",
+      "Bash(php -r:*)",
+      "Bash(php -m:*)"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "laravel-boost"
+  ]
+}

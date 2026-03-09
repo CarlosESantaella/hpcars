@@ -1,0 +1,168 @@
+@import 'tailwindcss';
+@import '../../vendor/livewire/flux/dist/flux.css';
+
+@source '../views';
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../vendor/livewire/flux-pro/stubs/**/*.blade.php';
+@source '../../vendor/livewire/flux/stubs/**/*.blade.php';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+    /* HP Cars Corporate Colors */
+    --color-primary: #cdd722;
+    --color-primary-light: #d8e23d;
+    --color-primary-dark: #b5bf1e;
+    --color-hpcars-light: #f9f9f9;
+    --color-hpcars-dark: #030102;
+
+    /* Extended primary palette for UI consistency */
+    --color-primary-50: #fafde8;
+    --color-primary-100: #f4fac4;
+    --color-primary-200: #ebf58c;
+    --color-primary-300: #dced4a;
+    --color-primary-400: #cdd722;
+    --color-primary-500: #b5bf1e;
+    --color-primary-600: #8e9617;
+    --color-primary-700: #6b7213;
+    --color-primary-800: #555a12;
+    --color-primary-900: #484c14;
+    --color-primary-950: #262905;
+
+    /* Neutral scale based on HP Cars dark color */
+    --color-zinc-50: #fafafa;
+    --color-zinc-100: #f5f5f5;
+    --color-zinc-200: #e5e5e5;
+    --color-zinc-300: #d4d4d4;
+    --color-zinc-400: #a3a3a3;
+    --color-zinc-500: #737373;
+    --color-zinc-600: #525252;
+    --color-zinc-700: #404040;
+    --color-zinc-800: #262626;
+    --color-zinc-900: #171717;
+    --color-zinc-950: #030102;
+
+    /* Accent colors - using HP Cars primary */
+    --color-accent: var(--color-primary);
+    --color-accent-content: var(--color-primary);
+    --color-accent-foreground: var(--color-hpcars-dark);
+}
+
+@layer theme {
+    .dark {
+        --color-accent: var(--color-primary);
+        --color-accent-content: var(--color-primary);
+        --color-accent-foreground: var(--color-white);
+    }
+}
+
+@layer base {
+    html.dark {
+        color-scheme: dark;
+    }
+
+    body {
+        @apply text-zinc-900 dark:text-zinc-100;
+    }
+
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentColor);
+    }
+}
+
+[data-flux-field]:not(ui-radio, ui-checkbox) {
+    @apply grid gap-2;
+}
+
+[data-flux-label] {
+    @apply  !mb-0 !leading-tight;
+}
+
+input:focus[data-flux-control],
+textarea:focus[data-flux-control],
+select:focus[data-flux-control] {
+    @apply outline-hidden ring-2 ring-primary ring-offset-2 ring-offset-white dark:ring-offset-zinc-950;
+}
+
+/* Force light text on form controls in dark mode */
+.dark input[data-flux-control],
+.dark textarea[data-flux-control],
+.dark textarea[data-flux-textarea],
+.dark select[data-flux-control] {
+    @apply text-white;
+}
+
+.dark input[data-flux-control]::placeholder,
+.dark textarea[data-flux-control]::placeholder,
+.dark textarea[data-flux-textarea]::placeholder {
+    @apply text-zinc-400;
+}
+
+/* HP Cars Custom Utilities */
+@layer utilities {
+    /* Primary button styling */
+    .btn-primary {
+        @apply bg-primary text-hpcars-dark font-semibold hover:bg-primary-dark transition-colors;
+    }
+
+    /* Sidebar active state */
+    .sidebar-active {
+        @apply bg-primary/10 text-primary border-l-2 border-primary;
+    }
+
+    /* Card with HP Cars styling */
+    .card-hpcars {
+        @apply bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg shadow-sm;
+    }
+
+    /* Link styling with primary color */
+    .link-primary {
+        @apply text-primary hover:text-primary-dark transition-colors;
+    }
+}
+
+/* Flux component overrides for HP Cars branding */
+[data-flux-button][data-variant="primary"] {
+    @apply bg-primary text-hpcars-dark hover:bg-primary-dark;
+}
+
+[data-flux-button][data-variant="primary"]:focus {
+    @apply ring-2 ring-primary ring-offset-2;
+}
+
+/* Sidebar item active state */
+[data-flux-sidebar-item][data-current="true"] {
+    @apply bg-primary/10 text-primary;
+}
+
+[data-flux-sidebar-item][data-current="true"]::before {
+    content: '';
+    @apply absolute left-0 top-0 bottom-0 w-0.5 bg-primary;
+}
+
+/* Navigation progress bar color */
+:root {
+    --livewire-progress-bar-color: #cdd722;
+}
+
+/* Checkbox and radio overrides */
+[data-flux-checkbox]:checked,
+[data-flux-radio]:checked {
+    @apply bg-primary border-primary;
+}
+
+/* Link styling */
+[data-flux-link] {
+    @apply text-primary hover:text-primary-dark;
+}
+
+/* Badge primary variant */
+[data-flux-badge][data-color="primary"] {
+    @apply bg-primary/10 text-primary-700 dark:text-primary-300;
+}
