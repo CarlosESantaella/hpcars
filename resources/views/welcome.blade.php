@@ -28,7 +28,7 @@
                                 <img src="{{ asset('assets/imgs/hpcars-logo.jpeg') }}" alt="HP Cars" class="size-12 object-cover" />
                             </div>
                             <div class="hidden sm:block">
-                                <span class="text-primary font-bold text-xl">HP Cars</span>
+                                <span class="text-primary font-bold text-xl">HP Cars 2</span>
                                 <p class="text-zinc-400 text-xs">Alquiler de Vehículos</p>
                             </div>
                         </div>
