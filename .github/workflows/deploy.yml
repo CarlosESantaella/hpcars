@@ -1,0 +1,47 @@
+# ============================================================
+# Workflow de Deploy Automático
+# Se ejecuta cuando se hace push a master o se mergea un PR a master
+# ============================================================
+
+name: Deploy a Produccion
+
+# ¿Cuándo se ejecuta este workflow?
+on:
+  # Opción 1: Cuando alguien hace push directo a la rama master
+  push:
+    branches:
+      - master          # IMPORTANTE: Cambiar a 'master' si tu rama se llama master
+
+  # Opción 2: Cuando se cierra un Pull Request hacia master
+  pull_request:
+    branches:
+      - master          # IMPORTANTE: Cambiar a 'master' si tu rama se llama master
+    types:
+      - closed        # Solo cuando se cierra (no cuando se abre o actualiza)
+
+# ¿Qué tareas ejecutar?
+jobs:
+  deploy:
+    name: Desplegar al VPS
+    runs-on: ubuntu-latest
+
+    # Esta condición es importante:
+    # - Si fue un push: siempre se ejecuta
+    # - Si fue un pull request: solo se ejecuta si fue MERGEADO
+    #   (no si fue cerrado sin mergear)
+    if: >
+      github.event_name == 'push' ||
+      (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
+
+    # Pasos a ejecutar (en orden)
+    steps:
+
+      # Paso 1: Conectarse al servidor por SSH y ejecutar el script
+      - name: Ejecutar deploy en el servidor
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{ secrets.VPS_PORT }}
+          script: bash ~/deploy.sh
